@@ -5,8 +5,8 @@ public class CalcTestRunner extends Setup {
     @Test
     public void doSum(){
         CalcScreen calcScreen=new CalcScreen(driver);
-        String res= calcScreen.doSum();
+        int res= calcScreen.doSum(8,6);
         System.out.println(res);
-        Assert.assertEquals(res,"12");
+        Assert.assertEquals(res,14);
     }
 }

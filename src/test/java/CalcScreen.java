@@ -1,5 +1,6 @@
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -15,15 +16,18 @@ public class CalcScreen {
     WebElement btnEqual;
     @FindBy(id="com.google.android.calculator:id/result_final")
     WebElement txtResult;
+    AndroidDriver driver;
 
     public CalcScreen(AndroidDriver driver){
+        this.driver=driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver),this);
     }
-    public String doSum(){
-        btn7.click();
+    public int doSum(int num1, int num2){
+        driver.findElement(By.id("com.google.android.calculator:id/digit_"+num1)).click();
         btnAdd.click();
-        btn5.click();
+        driver.findElement(By.id("com.google.android.calculator:id/digit_"+num2)).click();
         btnEqual.click();
-        return txtResult.getText();
+        return Integer.parseInt(txtResult.getText());
+
     }
 }
